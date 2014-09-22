@@ -8,7 +8,7 @@ class UrlMappings {
         }
 
 		"/my"(view: "/my/view")
-		
+		"/image/$id/$filename?" (controller: "image", action: "view")
 		
         "/"(view:"/index")
         "500"(view:'/error')

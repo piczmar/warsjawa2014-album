@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 class PictureController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Picture.list(params), model:[pictureInstanceCount: Picture.count()]
@@ -91,7 +91,7 @@ class PictureController {
             '*'{ render status: NO_CONTENT }
         }
     }
-
+	
     protected void notFound() {
         request.withFormat {
             form multipartForm {

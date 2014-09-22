@@ -40,7 +40,7 @@
 					
 						<td><g:link action="show" id="${pictureInstance.id}">${fieldValue(bean: pictureInstance, field: "title")}</g:link></td>
 					
-						<td>${fieldValue(bean: pictureInstance, field: "data")}</td>
+						<td><al:pictureImg picture="${pictureInstance}" width="200px" height="200px" /></td>
 					
 						<td><g:formatDate date="${pictureInstance.dateCreated}" /></td>
 					
