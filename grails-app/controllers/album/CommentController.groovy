@@ -11,8 +11,18 @@ class CommentController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+		def query = {
+           	if (params.pictureId) {
+                    eq('picture.id', params.pictureId as Long)
+            }
+            if (params.sort){
+                order(params.sort,params.order)
+            }
+     	}
+		def criteria = Comment.createCriteria()	
         params.max = Math.min(max ?: 10, 100)
-        respond Comment.list(params), model:[commentInstanceCount: Comment.count()]
+		def comments = criteria.list(query,max: params.max, offset: params.offset)
+        respond comments, model:[commentInstanceCount: comments.totalCount]
     }
 
     def show(Comment commentInstance) {
@@ -20,7 +30,12 @@ class CommentController {
     }
 
     def create() {
-        respond new Comment(params)
+		def comment = new Comment(params)
+		if(params.pictureId){
+			def p = Picture.get(params.pictureId)		
+			comment.picture = p
+		}
+        respond comment
     }
 
     @Transactional
@@ -40,7 +55,8 @@ class CommentController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'comment.label', default: 'Comment'), commentInstance.id])
-                redirect commentInstance
+                //redirect commentInstance
+				redirect (controller: "picture", action: "show", params: [id: commentInstance.picture.id])
             }
             '*' { respond commentInstance, [status: CREATED] }
         }

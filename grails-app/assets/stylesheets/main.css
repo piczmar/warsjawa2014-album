@@ -594,3 +594,16 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+.center{
+	text-align: center;
+}
+.image-wrapper{
+	text-align: center;
+}
+.image-wrapper img{
+	padding: 10px;
+}
+.image-wrapper p{
+	
+}

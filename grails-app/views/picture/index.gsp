@@ -38,14 +38,8 @@
 				<g:each in="${pictureInstanceList}" status="i" var="pictureInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${pictureInstance.id}">${fieldValue(bean: pictureInstance, field: "title")}</g:link></td>
-					
-						<td><al:pictureImg picture="${pictureInstance}" width="200px" height="200px" /></td>
-					
-						<td><g:formatDate date="${pictureInstance.dateCreated}" /></td>
-					
-						<td><g:formatDate date="${pictureInstance.lastUpdated}" /></td>
-					
+						<g:render template="details"  model="['pictureInstance':pictureInstance]"/>
+
 					</tr>
 				</g:each>
 				</tbody>
@@ -54,5 +48,9 @@
 				<g:paginate total="${pictureInstanceCount ?: 0}" />
 			</div>
 		</div>
+
+
+<g:render template="detailsScript" />
+
 	</body>
 </html>
