@@ -6,7 +6,8 @@ import org.springframework.core.io.Resource
 class ImageController {
 
 	ResourceLocator grailsResourceLocator
-	
+	ImageService imageService
+
 	def view() {
 		def picture = Picture.get(params.id)
 		if (picture) {
@@ -26,5 +27,22 @@ class ImageController {
 		else {
 			response.sendError(404)
 		}
+	}
+
+	def rotateL(Picture pictureInstance){
+		if(pictureInstance.data){
+			pictureInstance.data = imageService.transform(pictureInstance.data, ImageService.Operation.RotateAntiClockWise90)
+			pictureInstance.save flush:true
+			println "Rotate L"
+		}
+		redirect pictureInstance
+	}
+	def rotateR(Picture pictureInstance){
+		if(pictureInstance.data){
+			pictureInstance.data = imageService.transform(pictureInstance.data, ImageService.Operation.RotateClockWise90)
+			pictureInstance.save flush:true
+			println "Rotate R"
+		}
+		redirect pictureInstance
 	}
 }

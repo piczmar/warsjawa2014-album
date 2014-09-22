@@ -30,6 +30,24 @@ class PictureController {
             return
         }
 
+		
+		/*
+				def f = request.getFile('data')
+				println f.getOriginalFilename()
+				println f.getContentType()
+				println f.getSize()
+				if (f.empty) {
+					flash.message = 'file cannot be empty'
+					render(view: 'uploadForm')
+					return
+				}
+				byte[] res = imageService.transform(f.getBytes(), ImageService.Operation.RotateClockWise90)
+				new File(f.getOriginalFilename()).withOutputStream {
+						it.write res
+				}
+				//f.transferTo(new File(f.getOriginalFilename()))
+		*/
+		
         if (pictureInstance.hasErrors()) {
             respond pictureInstance.errors, view:'create'
             return

@@ -31,6 +31,9 @@
 			
 				<g:form url="[resource:pictureInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
+					<g:link  action="rotateL" controller="image" resource="${pictureInstance}"><span class="rotate-left"><g:message code="default.button.rotateL.label" default="Rotate Left" /></span></g:link>
+					<g:link  action="rotateR" controller="image" resource="${pictureInstance}"><span class="rotate-right"><g:message code="default.button.rotateR.label" default="Rotate Right" /></span></g:link>
+					
 					<g:link class="edit" action="edit" resource="${pictureInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
