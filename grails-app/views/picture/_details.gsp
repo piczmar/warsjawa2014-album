@@ -4,6 +4,6 @@
 <g:link action="show" id="${pictureInstance.id}">
  <al:pictureImg picture="${pictureInstance}" target="_blank" title="Show Original" width="200px" height="200px"/></g:link>
 <p>${fieldValue(bean: pictureInstance, field: "title")}</p>
-created on <g:formatDate date="${pictureInstance.dateCreated}" /></p>
+ by <i>${pictureInstance.createdBy.username}</i> on <i><g:formatDate date="${pictureInstance.dateCreated}" /></i></p>
 <button  class="showComments" type="button" >Comments ${pictureInstance.comments.size()}</button>
 </div>

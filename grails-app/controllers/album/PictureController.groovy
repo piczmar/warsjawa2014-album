@@ -4,12 +4,17 @@ package album
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityService
 
+@Secured(['permitAll'])
 @Transactional(readOnly = true)
 class PictureController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
+	SpringSecurityService springSecurityService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Picture.list(params), model:[pictureInstanceCount: Picture.count()]
@@ -18,13 +23,15 @@ class PictureController {
     def show(Picture pictureInstance) {
         respond pictureInstance
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_FULLY'])
     def create() {
         respond new Picture(params)
     }
 
     @Transactional
     def save(Picture pictureInstance) {
+
         if (pictureInstance == null) {
             notFound()
             return
@@ -47,6 +54,9 @@ class PictureController {
 				}
 				//f.transferTo(new File(f.getOriginalFilename()))
 		*/
+
+		pictureInstance.createdBy = springSecurityService.getCurrentUser()
+        pictureInstance.validate()
 		
         if (pictureInstance.hasErrors()) {
             respond pictureInstance.errors, view:'create'
@@ -68,6 +78,7 @@ class PictureController {
         respond pictureInstance
     }
 
+	@Secured(['IS_AUTHENTICATED_FULLY'])
     @Transactional
     def update(Picture pictureInstance) {
         if (pictureInstance == null) {
@@ -91,6 +102,7 @@ class PictureController {
         }
     }
 
+	@Secured(['ROLE_ADMIN'])
     @Transactional
     def delete(Picture pictureInstance) {
 

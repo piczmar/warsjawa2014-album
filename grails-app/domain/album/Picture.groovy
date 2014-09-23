@@ -1,4 +1,5 @@
 package album
+import album.security.User
 
 class Picture {
 	Long id
@@ -6,6 +7,7 @@ class Picture {
 	byte[] data
 	Date dateCreated
 	Date lastUpdated
+	User createdBy
 	
 	static hasMany= [comments: Comment]
     static constraints = {

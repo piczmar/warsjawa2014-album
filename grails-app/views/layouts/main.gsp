@@ -22,6 +22,16 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>
+
+<sec:ifLoggedIn>
+	<sec:loggedInUserInfo field="username"/> 
+	<g:remoteLink class="logout" controller="logout" method="post" asynchronous="false" onSuccess="location.reload()">Logout</g:remoteLink>
+</sec:ifLoggedIn>
+
+<sec:ifNotLoggedIn>
+	<g:link action="auth" controller="login" >Login</g:link>
+</sec:ifNotLoggedIn>
+
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
