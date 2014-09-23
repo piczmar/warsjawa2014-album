@@ -2,11 +2,12 @@ package album
 
 import org.codehaus.groovy.grails.core.io.ResourceLocator
 import org.springframework.core.io.Resource
+import album.spring.ImageService
 
 class ImageController {
 
 	ResourceLocator grailsResourceLocator
-	ImageService imageService
+	ImageService oldSpringService
 
 	def view() {
 		def picture = Picture.get(params.id)
@@ -31,7 +32,7 @@ class ImageController {
 
 	def rotateL(Picture pictureInstance){
 		if(pictureInstance.data){
-			pictureInstance.data = imageService.transform(pictureInstance.data, ImageService.Operation.RotateAntiClockWise90)
+			pictureInstance.data = oldSpringService.transform(pictureInstance.data, ImageService.Operation.RotateAntiClockWise90)
 			pictureInstance.save flush:true
 			println "Rotate L"
 		}
@@ -39,7 +40,7 @@ class ImageController {
 	}
 	def rotateR(Picture pictureInstance){
 		if(pictureInstance.data){
-			pictureInstance.data = imageService.transform(pictureInstance.data, ImageService.Operation.RotateClockWise90)
+			pictureInstance.data = oldSpringService.transform(pictureInstance.data, ImageService.Operation.RotateClockWise90)
 			pictureInstance.save flush:true
 			println "Rotate R"
 		}

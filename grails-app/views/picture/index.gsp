@@ -20,21 +20,11 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-			<thead>
-					<tr>
-					
-						<g:sortableColumn property="title" title="${message(code: 'picture.title.label', default: 'Title')}" />
-					
-						<g:sortableColumn property="data" title="${message(code: 'picture.data.label', default: 'Data')}" />
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'picture.dateCreated.label', default: 'Date Created')}" />
-					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'picture.lastUpdated.label', default: 'Last Updated')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
+			
+			<div class="pagination">
+				<g:paginate total="${pictureInstanceCount ?: 0}" />
+			</div>
+			
 				<g:each in="${pictureInstanceList}" status="i" var="pictureInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
@@ -42,8 +32,7 @@
 
 					</tr>
 				</g:each>
-				</tbody>
-			</table>
+
 			<div class="pagination">
 				<g:paginate total="${pictureInstanceCount ?: 0}" />
 			</div>

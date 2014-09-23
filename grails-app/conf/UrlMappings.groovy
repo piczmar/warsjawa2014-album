@@ -12,6 +12,8 @@ class UrlMappings {
 		"/image/rotateR/$id" (controller: "image", action: "rotateR")
 		"/image/$id/$filename?" (controller: "image", action: "view")
 		
+		'/about'(uri:"/about/index.dispatch")
+		
         "/"(view:"/index")
         "500"(view:'/error')
 	}

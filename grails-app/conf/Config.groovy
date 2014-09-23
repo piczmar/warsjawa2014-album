@@ -69,7 +69,7 @@ grails.json.legacy.builder = false
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 // packages to include in Spring bean scanning
-grails.spring.bean.packages = []
+grails.spring.bean.packages = ['album.spring']
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
@@ -114,4 +114,5 @@ log4j.main = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+	info   'album'
 }
